@@ -17,9 +17,7 @@ public:
             if(x&1) odd++;
             tot+=x;
         }
-        if(odd>1) return false;
-        if(tot%2==0 and odd>=1) return false;
-        return true;
+        return (odd<=1);
     }
     void f(TreeNode *root,unordered_map<int,int> &mp,int &ans){
         if(!root) return;
