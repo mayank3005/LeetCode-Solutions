@@ -31,6 +31,7 @@ public:
             if(curr.size()>level){
                 level++;
                 for(auto &it:changed) st.erase(it);
+                changed.clear();
             }
             
             string word=curr.back();
