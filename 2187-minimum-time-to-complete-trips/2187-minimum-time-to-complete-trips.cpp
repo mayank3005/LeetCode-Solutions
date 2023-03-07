@@ -4,7 +4,7 @@ public:
         if(time.size()==1){
             return totalTrips*1LL*time[0];
         }
-        long long l=0,r=1e13;
+        long long l=0,r=1e14;
         while(l+1<r){
             long long mid=(l+r)>>1;
             long long trips=0;
