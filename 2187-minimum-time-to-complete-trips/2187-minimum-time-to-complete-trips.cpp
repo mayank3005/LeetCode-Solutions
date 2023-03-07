@@ -1,9 +1,6 @@
 class Solution {
 public:
     long long minimumTime(vector<int>& time, int totalTrips) {
-        if(time.size()==1){
-            return totalTrips*1LL*time[0];
-        }
         long long l=0,r=1e14;
         while(l+1<r){
             long long mid=(l+r)>>1;
