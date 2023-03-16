@@ -14,22 +14,27 @@ using namespace std;
 class Solution
 {
     unordered_map<string,bool> mp;
+    int dp[1101];
 public:
 
     int f(int idx,string &s){
         int n=s.length();
         if(idx==n) return 1;
+        
+        int &ans=dp[idx];
+        if(ans!=-1) return ans;
+        
         string curr="";int curr_ans=0;
         for(int i=idx;i<n;i++){
             curr.push_back(s[i]);
             if(mp.find(curr)!=mp.end()) curr_ans+=f(i+1,s);
         }
-        return curr_ans;
+        return ans=curr_ans;
     }
 
     int wordBreak(string A, vector<string> &B) {
         //code here
-        mp.clear();
+        mp.clear(); memset(dp,-1,sizeof(dp));
         for(auto &i:B) mp[i]=true;
         f(0,A);
     }
