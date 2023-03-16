@@ -4,6 +4,8 @@ using namespace std;
 
 // } Driver Code Ends
 // User function template for C++
+
+int dp[1001][1001];
 class Solution{
     public:
     
@@ -14,14 +16,17 @@ class Solution{
             return m<0;
         }
         
-        if(n>=0 and (a[m]==b[n] or a[m]=='?')) return f(m-1,n-1,a,b);
-        else if(a[m]=='*') return f(m-1,n,a,b) or f(m-1,n-1,a,b) or f(m,n-1,a,b);
-        return false;
+        int &ans=dp[m][n];
+        
+        if(n>=0 and (a[m]==b[n] or a[m]=='?')) return ans=f(m-1,n-1,a,b);
+        else if(a[m]=='*') return ans=f(m-1,n,a,b) or f(m-1,n-1,a,b) or f(m,n-1,a,b);
+        return ans=false;
     }
     
     bool match(string wild, string pattern)
     {
         // code here
+        memset(dp,-1,sizeof(dp));
         return f(wild.size()-1,pattern.size()-1,wild,pattern);
     }
 };
