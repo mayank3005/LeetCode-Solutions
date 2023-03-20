@@ -14,19 +14,16 @@ public:
     vector<int> inorderTraversal(TreeNode* root) {
         
         vector<int> inorder;
-        while(root){
-            if(root->left==NULL){
-                inorder.push_back(root->val);
-                root=root->right;
+        stack<TreeNode*> st;
+        while(root or !st.empty()){
+            if(root){
+                st.push(root);root=root->left;
             }else{
-                TreeNode *temp=root->left;
-                while(temp->right and temp->right!=root){
-                    temp=temp->right;
-                }
-                if(!temp->right) temp->right=root,root=root->left;
-                else temp->right=NULL,inorder.push_back(root->val),root=root->right;
+                root=st.top();st.pop();
+                inorder.push_back(root->val);root=root->right;
             }
         }
+        
         return inorder;
         
     }
