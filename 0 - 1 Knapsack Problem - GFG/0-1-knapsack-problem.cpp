@@ -13,7 +13,7 @@ class Solution
        // Your code here
        int dp[n][W+1];
        for(int i=0;i<n;i++){
-           for(int j=0;j<=W;j++){
+           for(int j=W;j>=0;j--){
                if(!i){
                    if(j>=wt[i]) dp[i][j]=val[0];
                    else dp[i][j]=0;
