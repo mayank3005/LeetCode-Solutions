@@ -8,18 +8,16 @@ class Solution {
     long long int count(int coins[], int n, int sum) {
 
         // code here.
-        long long dp[n][sum+1];
+        long long dp[sum+1]; memset(dp,0,sizeof(dp));
         
         for(int i=0;i<n;i++){
             for(int j=0;j<=sum;j++){
-                if(!i and !j) {dp[i][j]=1;continue;}
-                dp[i][j]=0;
-                if(j>=coins[i]) dp[i][j]+=dp[i][j-coins[i]];
-                if(i) dp[i][j]+=dp[i-1][j];
+                if(!i and !j) {dp[j]=1;continue;}
+                if(j>=coins[i]) dp[j]+=dp[j-coins[i]];
             }
         }
         
-        return dp[n-1][sum];
+        return dp[sum];
     }
 };
 
