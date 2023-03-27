@@ -11,19 +11,18 @@ class Solution
     int knapSack(int W, int wt[], int val[], int n) 
     { 
        // Your code here
-       int dp[n][W+1];
+       int dp[W+1];
        for(int i=0;i<n;i++){
            for(int j=W;j>=0;j--){
                if(!i){
-                   if(j>=wt[i]) dp[i][j]=val[0];
-                   else dp[i][j]=0;
+                   if(j>=wt[i]) dp[j]=val[0];
+                   else dp[j]=0;
                    continue;
                }
-               dp[i][j]=dp[i-1][j];
-               if(j>=wt[i]) dp[i][j]=max(dp[i][j],val[i]+dp[i-1][j-wt[i]]);
+               dp[j]=max(dp[j],(j>=wt[i])?(val[i]+dp[j-wt[i]]):0);
            }
        }
-       return dp[n-1][W];
+       return dp[W];
     }
 };
 
