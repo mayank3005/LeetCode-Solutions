@@ -19,6 +19,7 @@ class Solution
         
         while(!pq.empty()){
             int u=pq.top().second;int d=pq.top().first;pq.pop();
+            if(d>dist[u]) continue;
             for(auto v:adj[u]){
                 if(d+v[1] < dist[v[0]]){
                     dist[v[0]]=d+v[1];
