@@ -9,14 +9,14 @@ public:
     }
     int minimizeMax(vector<int>& nums, int p) {
         int n=nums.size();
-        if(n==1 or p==0) return 0;
+        if(n==1) return 0;
         sort(nums.begin(),nums.end());
-        int l=0,r=nums.back()-nums[0]; int ans=r;
-        while(l<=r){
+        int l=-1,r=nums.back()-nums[0]; 
+        while(l+1<r){
             int mid=(l+r)>>1;
-            if(check(nums,mid,p)) ans=mid,r=mid-1;
-            else l=mid+1;
+            if(check(nums,mid,p)) r=mid;
+            else l=mid;
         }
-        return ans;
+        return r;
     }
 };
