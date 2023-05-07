@@ -7,39 +7,32 @@ using namespace std;
 // } Driver Code Ends
 // User function Template for C++
 
+const int N = 1e5 + 5;
+int bit[N];
 class Solution{
+    int query(int x) {
+    	int ans = 0;
+    	while (x > 0) {ans += bit[x]; x -= (x & -x);}
+    	return ans;
+    }
+    
+    void update(int x, int val) {
+    	while (x < N) {
+    		bit[x] += val; x += (x & -x);
+    	}
+    }
 public:
-    int segmentTree(int arr[], vector<int> &sTree, int sInd, int l, int h){
-        if(l==h){
-            sTree[sInd] = arr[l];
-            return arr[l];
-        }
-        int mid = l + (h-l)/2;
-        sTree[sInd] = segmentTree(arr,sTree,2*sInd + 1, l,mid) + 
-                        segmentTree(arr,sTree,2*sInd + 2, mid+1,h);
-        return sTree[sInd];
-    }
-    int sumR(vector<int> &sTree, int si, int sl, int sr, int l,int r){
-        if(l<=sl && r>=sr){
-            return sTree[si];
-        }
-        if(sl>r || sr<l) return 0;
-        int mid = sl + (sr-sl)/2;
-        return sumR(sTree,2*si + 1, sl,mid,l,r) + sumR(sTree, 2*si + 2, mid+1,sr,l,r);
-    }
     vector<int> querySum(int n, int arr[], int q, int queries[])
     {
         // code here
-        int ht = (int)(ceil(log2(n)));
-        int sz = 2*(int)pow(2,ht) - 1;
-        vector<int> sTree(sz);
-        vector<int> res;
-        segmentTree(arr,sTree,0,0,n-1);
-        for(int i=0; i<2*q; i+=2){
-            int x = sumR(sTree,0,0,n-1,queries[i]-1,queries[i+1]-1);
-            res.push_back(x);
+        memset(bit,0,sizeof(bit));
+        for (int i = 1; i <= n; i++) {update(i, arr[i-1]);}
+        vector<int> ans;
+        for(int i=0;i<2*q;i+=2){
+            int l=queries[i],r=queries[i+1];
+            ans.push_back(query(r)-query(l-1));
         }
-        return res;
+        return ans;
     }
 };
 
