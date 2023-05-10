@@ -6,7 +6,7 @@ public:
         if(n==0||citations[n-1]==0){return 0;}
      
       for(int i=0;i<n;i++){ 
-         if(n-i-1<citations[i]){
+         if(n-i<citations[i]+1){
              return n-i;
          }   
       }
