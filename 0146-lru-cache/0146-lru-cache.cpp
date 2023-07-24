@@ -9,13 +9,11 @@ public:
             key=k,val=v;
         }
     };
-    unordered_map<int,node*> mp;
+    map<int,node*> mp;
         node *head=new node(-1,-1);
         node *tail=new node(-1,-1);
     LRUCache(int capacity) {
         mx=capacity;
-        mp.reserve(1024);
-        mp.max_load_factor(0.25);
 
         head->next=tail;tail->prev=head;
     }
