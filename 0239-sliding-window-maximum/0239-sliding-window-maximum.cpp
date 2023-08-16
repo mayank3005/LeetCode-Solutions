@@ -10,7 +10,7 @@ public:
         for(int i=k;i<nums.size();i++){
             ans.push_back(nums[q.front()]);
             if(q.front()==i-k) q.pop_front();
-            while(!q.empty() and nums[q.back()]<nums[i]) q.pop_back();
+            while(!q.empty() and nums[q.back()]<=nums[i]) q.pop_back();
             q.push_back(i);
         }
         ans.push_back(nums[q.front()]);
