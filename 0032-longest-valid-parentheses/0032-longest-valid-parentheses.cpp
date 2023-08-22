@@ -9,12 +9,12 @@ public:
                 else st.push(i);
             }
         }
-        int ans=0,a=n,b=-1;
+        int ans=0,a=n,b=0;
         while(!st.empty()){
-            int b=st.top();st.pop();
+            b=st.top();st.pop();
             ans=max(ans,a-b-1); a=b;
         }
-        ans=max(ans,a-b-1);
+        ans=max(ans,a);
         return ans;
     }
 };
