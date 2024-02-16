@@ -11,15 +11,20 @@
  */
 class Solution {
 public:
-    int f(TreeNode* root,int &height){
+    int ans=0; map<TreeNode*,int> height;
+    int f(TreeNode* root){
         if(!root) return 0;
-        int lh=0,rh=0;   
-        int a=f(root->left,lh),b=f(root->right,rh);
-        height=1+max(lh,rh); 
-        return max({a,b,lh+rh});
+        return height[root] = 1+max(f(root->left),f(root->right));
+    }
+    int dd(TreeNode *root){
+        if(!root) return 0;
+        dd(root->left);
+        dd(root->right);
+        int lh=height[root->left],rh=height[root->right];
+        return ans=max(ans,lh+rh);
     }
     int diameterOfBinaryTree(TreeNode* root) {
-        int height;
-        return f(root,height);
+        f(root);
+        return dd(root);
     }
 };
