@@ -11,7 +11,7 @@
  */
 class Solution {
 public:
-    int ans=0; map<TreeNode*,int> height;
+    int ans=0; unordered_map<TreeNode*,int> height;
     int f(TreeNode* root){
         if(!root) return 0;
         return height[root] = 1+max(f(root->left),f(root->right));
